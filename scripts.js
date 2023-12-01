@@ -5,6 +5,7 @@ const numberButton = document.querySelector("#number-button");
 const clearButton = document.querySelector("#clear-button");
 const colorButton = document.querySelector("#color-button");
 const blackButton = document.querySelector("#black-button");
+let COLORMODE = false;
 loadScreen(BEGINNING_BOXES);
 
 
@@ -19,7 +20,7 @@ function loadScreen(numberBoxes) {
         boxes.appendChild(box);
         boxes.addEventListener("mouseover", () => {
             target = event.target
-            changeColor(target);
+            changeColor(target, COLORMODE);
             addListener(boxes);
             numberButton.addEventListener("mousedown", changeNumber);
             clearButton.addEventListener("mousedown", clearScreen);
@@ -47,19 +48,42 @@ function clearScreen () {
     }
 }
 function colorMode () {
-    //change to color mode
+    if (COLORMODE) {
+        COLORMODE;
+    }
+    else {
+        return (COLORMODE = true);
+    }
 }
 function blackMode () {
-    //change to black mode
+    if (COLORMODE) {
+        return (COLORMODE=false);
+    }
+    else {
+        return COLORMODE;
+    }
 }
 function addListener (boxes) {
         boxes.addEventListener("mouseover", () => {
-        target = e.target;
-        e.stopImmediatePropagation();
-        changeColor(target);
+        target = event.target;
+        event.stopImmediatePropagation();
+        changeColor(target, COLORMODE);
 
 })}
-function changeColor (value) {
-    value.style.cssText= "background-color: black";
-    boxes.style.cssText= "background-color: none";
+function changeColor (value, COLORMODE) {
+    if(COLORMODE) {
+        //border-color: rgb(200, 200, 200);
+        a=random();
+        b=random();
+        c=random()
+        value.style.cssText= `background-color: rgb(${a} , ${b} , ${c})`;
+        boxes.style.cssText= "background-color: none";
+    } else {
+        value.style.cssText= "background-color: black";
+        boxes.style.cssText= "background-color: none";
+}
+}
+
+function random(){
+    return (Math.random()*255);
 }
