@@ -5,11 +5,11 @@ const numberButton = document.querySelector("#number-button");
 const clearButton = document.querySelector("#clear-button");
 const colorButton = document.querySelector("#color-button");
 const blackButton = document.querySelector("#black-button");
-    loadScreen(BEGINNING_BOXES);
-//for the initial loading
+loadScreen(BEGINNING_BOXES);
+
 
 function loadScreen(numberBoxes) {
-    if (numberBoxes >30) {return;}
+    if (numberBoxes >50){return;}
     let iteration = numberBoxes*numberBoxes;
     for(;iteration>0; iteration--)
     {
@@ -29,8 +29,16 @@ function loadScreen(numberBoxes) {
     }
 }
 function changeNumber() {
-    prompt ("how many");
+    let number =prompt ("How many boxes do you want? Has to be a number less that 50, will return the square of your number.");
+    clearScreenBoxes();
+    loadScreen(number);
 }
+
+function clearScreenBoxes(){
+    const boxRevert = document.querySelectorAll(".box-style");
+    for (let i=0;i<boxRevert.length; i++) {
+    boxes.removeChild(boxRevert[i]);
+}}
 function clearScreen () {
     const boxRevert = document.querySelectorAll(".box-style");
     console.log(boxRevert);
@@ -46,8 +54,8 @@ function blackMode () {
 }
 function addListener (boxes) {
         boxes.addEventListener("mouseover", () => {
-        target = event.target;
-        event.stopImmediatePropagation();
+        target = e.target;
+        e.stopImmediatePropagation();
         changeColor(target);
 
 })}
